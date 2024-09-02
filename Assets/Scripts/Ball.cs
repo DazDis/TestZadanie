@@ -1,16 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Ball : MonoBehaviour
 {
     private Vector2 _speed = new Vector2(50,100);
-    private Rigidbody2D _rigidbody2d;
+    public Rigidbody2D _rigidbody2d;
     public GameObject Player;
     public bool Active = false;
-
+    private Vector2 _multiplier = new Vector2(1,1);
 
 
     private void Start()
@@ -23,7 +19,7 @@ public class Ball : MonoBehaviour
 
         if (!Active) 
         { 
-            Vector3 NewPos = new Vector3(Player.transform.position.x, transform.position.y, 0);
+            Vector2 NewPos = new Vector2(Player.transform.position.x, transform.position.y);
             transform.position = NewPos;
            
         }
@@ -32,18 +28,21 @@ public class Ball : MonoBehaviour
     {
         
         _speed.x *= -1; _speed.y *= -1;
-        Push();
+        
         Block Block = collision.gameObject.GetComponent<Block>();
         if (Block == null) return;
         else 
         {
-            
+            Push(_speed);
             Block.GetDamage();
         }
     }
 
-    internal void Push()
+    internal void Push(Vector2 speed)
     {
-        _rigidbody2d.AddForce(_speed);
+        _rigidbody2d.AddForce(speed);
+        Debug.Log(speed);
     }
+
+    
 }

@@ -8,18 +8,24 @@ public class GameController : MonoBehaviour
     [SerializeField] private InputManager _inputManager;
     [SerializeField] private Ball _ball;
     [SerializeField] private Platform _platform;
+    [SerializeField] private DeathZone _deathZone;
+
+    private Vector2 _firstMovement = new Vector2 (50, 100);  
 
     private void OnEnable()
     {
         _inputManager.OnMouseClick.AddListener(BindOnMouseButtonClick);
         _inputManager.OnMouseMove.AddListener(BindOnMouseMove);
+        _deathZone.EndOfGame.AddListener(EndOfGame);
+
     }
+
 
     private void OnDisable()
     {
         _inputManager.OnMouseClick.RemoveListener(BindOnMouseButtonClick);
-        _inputManager.OnMouseMove.AddListener(BindOnMouseMove);
-
+        _inputManager.OnMouseMove.RemoveListener(BindOnMouseMove);
+        _deathZone.EndOfGame.RemoveListener(EndOfGame);
 
     }
 
@@ -33,11 +39,15 @@ public class GameController : MonoBehaviour
 
         if (!_ball.Active)
         {
-            _ball.Push();
+            _ball._rigidbody2d.AddForce(_firstMovement);
             
 
             _ball.Active = !_ball.Active;
 
         }
+    }
+    private void EndOfGame()
+    {
+        throw new NotImplementedException();
     }
 }
