@@ -5,10 +5,10 @@ using UnityEngine.Events;
 
 public class DeathZone : MonoBehaviour
 {
-    public UnityEvent EndOfGame;
+    public UnityEvent Respawn;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Ball Ball = collision.gameObject.GetComponent<Ball>();
-        if (Ball != null ) EndOfGame.Invoke();
+        if (Ball != null ) Respawn.Invoke();
     }
 }
