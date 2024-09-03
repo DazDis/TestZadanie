@@ -672,6 +672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Durability: 0
   Class: -2
+  size: {x: 0, y: 0}
 --- !u!1001 &1010062675
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1181,6 +1182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Durability: 0
   Class: -2
+  size: {x: 0, y: 0}
 --- !u!1 &1663541288
 GameObject:
   m_ObjectHideFlags: 0
@@ -1581,6 +1583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Durability: 0
   Class: -2
+  size: {x: 0, y: 0}
 --- !u!114 &2013646564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1741,6 +1744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Durability: 0
   Class: -2
+  size: {x: 0, y: 0}
 --- !u!1001 &5339171747115614957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1818,6 +1822,10 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1011730614}
+    - target: {fileID: 1133985284133803187, guid: 5ec9457eb021e8649bf10237a85ec5ef, type: 3}
+      propertyPath: Speed.y
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 1185484409600523902, guid: 5ec9457eb021e8649bf10237a85ec5ef, type: 3}
       propertyPath: m_Name
       value: Ball

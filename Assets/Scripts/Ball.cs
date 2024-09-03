@@ -1,13 +1,15 @@
+using System;
+using System.Drawing;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private Vector2 _speed = new Vector2(50,100);
+    public Vector2 Speed = new Vector2(50,150);
     public Rigidbody2D _rigidbody2d;
     public GameObject Player;
     public bool Active = false;
     private Vector2 _multiplier = new Vector2(1,1);
-
+    public Vector2 size;
 
     private void Start()
     {
@@ -26,21 +28,55 @@ public class Ball : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        _speed.x *= -1; _speed.y *= -1;
-        
-        Block Block = collision.gameObject.GetComponent<Block>();
-        if (Block == null) return;
-        else 
+
+        Block block = collision.gameObject.GetComponent<Block>();   
+        SpriteRenderer _spriteRenderer = collision.gameObject.GetComponent<SpriteRenderer>();
+        Vector2 Point = new Vector2(gameObject.transform.position.x - collision.collider.transform.position.x,
+                                    gameObject.transform.position.y - collision.collider.transform.position.y);
+        size = _spriteRenderer.bounds.size;
+       
+        if (block != null) { 
+
+            if ((size.x / 2) <= Math.Abs(Point.x))
+            {
+                if ((Speed.x > 0 == Point.x < 0) || (Speed.x < 0 == Point.x > 0))
+                    Speed.x *= -1;
+                
+            }
+            if ((size.y / 2) <= Math.Abs(Point.y))
+            {
+                if ((Speed.y > 0 == Point.y < 0) || (Speed.y < 0 == Point.y > 0))
+                    Speed.y *= -1;
+               
+            }
+            block.GetDamage();
+            Push(Speed);
+        }
+        else
         {
-            Push(_speed);
-            Block.GetDamage();
+            if ((size.x / 2) <= Math.Abs(Point.x))
+            {
+                Speed.x *= -1;
+                
+            }
+            if ((size.y / 2) <= Math.Abs(Point.y))
+            {
+                Speed.x = 50*(gameObject.transform.position.x - collision.collider.transform.position.x);
+                Speed.y = 100;
+            }
+            
+            Speed.y += 100 - Math.Abs(Speed.x);
+            Push(Speed);
+            
         }
     }
 
     internal void Push(Vector2 speed)
     {
+        _rigidbody2d.velocity = new Vector2(0, 0);
+        
         _rigidbody2d.AddForce(speed);
+       
         Debug.Log(speed);
     }
 

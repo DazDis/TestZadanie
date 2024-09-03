@@ -10,8 +10,9 @@ public class Platform : MonoBehaviour
     {
         Ball Ball = collision.gameObject.GetComponent<Ball>();
         
-        Vector2 vector2 = new Vector2((gameObject.transform.position.x - collision.collider.transform.position.x)*-50, 100);
-        Ball.Push(vector2);
+        
+       // Ball.Speed.x *= -(gameObject.transform.position.x - collision.collider.transform.position.x);
+        //Ball.Push(Ball.Speed);
        
     }
 }

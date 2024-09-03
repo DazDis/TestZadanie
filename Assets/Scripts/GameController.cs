@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
 
         if (!_ball.Active)
         {
-            _ball._rigidbody2d.AddForce(_firstMovement);
+            _ball.Push(_ball.Speed);
             
 
             _ball.Active = !_ball.Active;
