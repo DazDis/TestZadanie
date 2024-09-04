@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -15,8 +16,12 @@ public class GameController : MonoBehaviour
     [SerializeField] private LooseWindow _looseWindow;
     [SerializeField] private BlockManager _blockManager;
 
-    public int health;
-    private Vector3 _startposition = new Vector3 (-1, -5, 0);
+    [SerializeField] private TMP_Text _textScore;
+    [SerializeField] private TMP_Text _textZvanie;
+    [SerializeField] private TMP_Text _textSnaryadi;
+    public int Score;
+    public int Health;
+    private Vector3 _startposition = new Vector3(-1, -5, 0);
 
     //public List<Block> blocks = new List<Block>();
     Block[] blocks;
@@ -29,7 +34,7 @@ public class GameController : MonoBehaviour
         _blockManager.TouchedWall.AddListener(SpawnBlock);
     }
 
-    
+
 
     private void OnDisable()
     {
@@ -50,7 +55,7 @@ public class GameController : MonoBehaviour
         if (!_ball.Active)
         {
             _ball.Push(_ball.Speed);
-            
+
 
             _ball.Active = !_ball.Active;
 
@@ -58,20 +63,46 @@ public class GameController : MonoBehaviour
     }
     private void Respawn()
     {
-        
+        Health--;
         _ball.Active = false;
         _ball.Rigidbody2d.velocity = new Vector2(0, 0);
-        _ball.Speed = new Vector2(50, 150);
-        EndOfGame();
+        _ball.Speed = new Vector2(100, 250);
+        if (Health <= 0)
+        {
+            EndOfGame();
+        }
+        _textSnaryadi.text = "Snaryadi: " + Health;
 
     }
 
     private void SpawnBlock()
     {
-        int num = UnityEngine.Random.Range(0, 45);
-        while (blocks[num].Active) { num = UnityEngine.Random.Range(0, 45); }
+        
+        int num = UnityEngine.Random.Range(0, 30);
+        for (int i = 0; i < 3; i++)
+        {
+            if (blocks[num].Active)
+            {
+                num = UnityEngine.Random.Range(0, 30);
+                break;
+            }
+        }
         blocks[num].ChangeType();
 
+    }
+    public void AddScore(int score)
+    {
+        Score += score;
+        _textScore.text = "Poteri: " + Score.ToString();
+
+        if (Score < 50)
+            _textZvanie.text = "ZVanie: Sergant";
+        else if (Score > 50 && Score < 150)
+            _textZvanie.text = "ZVanie: Leitenant";
+        else if (Score > 150 && Score < 800)
+            _textZvanie.text = "ZVanie: Polkovnik";
+        else if (Score > 800)
+            _textZvanie.text = "ZVanie: General";
     }
     private void EndOfGame()
     {

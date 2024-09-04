@@ -134,8 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b257ce937f0013e49b66d721f4a038c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: {x: 50, y: 150}
-  _rigidbody2d: {fileID: 0}
+  Speed: {x: 100, y: 250}
+  Rigidbody2d: {fileID: 0}
   Player: {fileID: 0}
   Active: 0
   size: {x: 0, y: 0}

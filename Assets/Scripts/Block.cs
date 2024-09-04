@@ -7,7 +7,10 @@ using UnityEngine.Events;
 public class Block : MonoBehaviour
 {
     [SerializeField] private BlockManager _blockManager;
-    [SerializeField] private Color _color;
+    [SerializeField] private Sprite _sprite1;
+    [SerializeField] private Sprite _sprite2;
+    [SerializeField] private Sprite _sprite3;
+    [SerializeField] private Sprite _sprite4;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     public int Durability;
     public int Class;
@@ -24,32 +27,35 @@ public class Block : MonoBehaviour
     }
     public void ChangeType()
     {
-        int classnum = UnityEngine.Random.Range(0,4);
-        Debug.Log(classnum);
-        Class = classnum;
-        Active = true;
-        gameObject.SetActive(true);
-
+        if (Class != 9) 
+        { 
+            int classnum = UnityEngine.Random.Range(0,4);
+        
+            Class = classnum;
+            Active = true;
+            gameObject.SetActive(true);
+        }
         switch (Class)
         {
             case 0:
                 {
-                    _spriteRenderer.color = Color.yellow;
+
+                    _spriteRenderer.sprite = _sprite1;
                     break;
                 }
             case 1:
                 {
-                    _spriteRenderer.color = Color.green;
+                    _spriteRenderer.sprite = _sprite2;
                     break;
                 }
             case 2:
                 {
-                    _spriteRenderer.color = Color.red;
+                    _spriteRenderer.sprite = _sprite3;
                     break;
                 }
             case 3:
                 {
-                    _spriteRenderer.color = Color.black;
+                    _spriteRenderer.sprite = _sprite4;
                     break;
                 }
         }
@@ -69,13 +75,15 @@ public class Block : MonoBehaviour
         switch (Class)
         {
             case 0: 
-                { 
+                {
+                    _blockManager.AddScore(1);
                     Active = false;
                     gameObject.SetActive(false);
                     break;
                 }
             case 1:
                 {
+                    _blockManager.AddScore(5);
                     Active = false;
                     gameObject.SetActive(false);
                     break;
@@ -84,6 +92,7 @@ public class Block : MonoBehaviour
 
             case 2:
                 {
+                    _blockManager.AddScore(10);
                     Active = false;
                     gameObject.SetActive(false);
                     break;
@@ -91,6 +100,7 @@ public class Block : MonoBehaviour
 
             case 3:
                 {
+                    _blockManager.AddScore(30);
                     Active = false;
                     gameObject.SetActive(false);
                     break;
