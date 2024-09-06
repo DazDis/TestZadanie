@@ -1,14 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LooseWindow : MonoBehaviour
+public class WinWindow : MonoBehaviour
 {
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _menuButton;
+
     private void OnEnable()
     {
         _restartButton.onClick.AddListener(BindOnRestartClick);
@@ -20,9 +18,7 @@ public class LooseWindow : MonoBehaviour
     {
         _restartButton.onClick.RemoveListener(BindOnRestartClick);
         _menuButton.onClick.RemoveListener(BindOnMenuClick);
-
     }
-
     private void BindOnMenuClick()
     {
         SceneManager.LoadScene(0);
@@ -30,7 +26,7 @@ public class LooseWindow : MonoBehaviour
 
     private void BindOnRestartClick()
     {
-        Destroy(gameObject);
         SceneManager.LoadScene(1);
     }
 }
+

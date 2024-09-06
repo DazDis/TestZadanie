@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,7 +7,7 @@ public class MainWindow : MonoBehaviour
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _movementButton;
     [SerializeField] private Button _exitButton;
-    // Start is called before the first frame update
+    
     private void OnEnable()
     {
         _startButton.onClick.AddListener(BindOnStartButtonPressed);
@@ -33,11 +30,11 @@ public class MainWindow : MonoBehaviour
     }
     private void BindOnMovementButtonPressed()
     {
-        throw new NotImplementedException();
+        SceneManager.LoadScene(2);
     }
     private void BindOnExitButtonPressed()
     {
-        throw new NotImplementedException();
+        Application.Quit();
     }
 
 }

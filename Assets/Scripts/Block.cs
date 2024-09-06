@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,18 +9,20 @@ public class Block : MonoBehaviour
     [SerializeField] private Sprite _sprite3;
     [SerializeField] private Sprite _sprite4;
     [SerializeField] private SpriteRenderer _spriteRenderer;
+ 
     public int Durability;
     public int Class;
     public Vector2 Size;
     public Vector2 Position;
     public bool Active = false;
-    
 
-
-
+    public UnityEvent AddSpeed;
+    public UnityEvent AddBlocks;
+    public UnityEvent PlaySound;
+    public UnityEvent HitSound;
     private void Start()
     {
-        if (Class != 9) gameObject.SetActive(false);
+       gameObject.SetActive(false);
     }
     public void ChangeType()
     {
@@ -39,22 +38,25 @@ public class Block : MonoBehaviour
         {
             case 0:
                 {
-
+                    Durability = 1;
                     _spriteRenderer.sprite = _sprite1;
                     break;
                 }
             case 1:
                 {
+                    Durability = 2;
                     _spriteRenderer.sprite = _sprite2;
                     break;
                 }
             case 2:
                 {
+                    Durability = 1;
                     _spriteRenderer.sprite = _sprite3;
                     break;
                 }
             case 3:
                 {
+                    Durability = 3;
                     _spriteRenderer.sprite = _sprite4;
                     break;
                 }
@@ -62,9 +64,15 @@ public class Block : MonoBehaviour
     }
     public void GetDamage()
     {
-        
-        Durability -= 1;
-        if (Durability <= 0) Remove();
+       
+        Durability--;
+        if (Durability <= 0)
+        {
+            
+            Remove();
+            PlaySound.Invoke();
+        }
+        else HitSound.Invoke();
 
 
     }
@@ -76,6 +84,7 @@ public class Block : MonoBehaviour
         {
             case 0: 
                 {
+                    AddBlocks.Invoke();
                     _blockManager.AddScore(1);
                     Active = false;
                     gameObject.SetActive(false);
@@ -92,6 +101,7 @@ public class Block : MonoBehaviour
 
             case 2:
                 {
+                    AddSpeed.Invoke();
                     _blockManager.AddScore(10);
                     Active = false;
                     gameObject.SetActive(false);
@@ -106,7 +116,7 @@ public class Block : MonoBehaviour
                     break;
                 }
 
-            case 9: _blockManager.TouchedWall.Invoke(); break;
+            
 
 
         }
