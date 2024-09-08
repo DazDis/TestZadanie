@@ -29,11 +29,15 @@ public class GameController : MonoBehaviour
 
     public List<Block> blocks = new List<Block>();
 
+    private void OnApplicationFocus(bool focus)
+    {
+            Cursor.visible = !focus;
 
+    }
     private void Awake()
     {
        blocks = new List<Block>(FindObjectsOfType<Block>());
-        
+       
     }
     private void OnEnable()
     {
@@ -72,6 +76,10 @@ public class GameController : MonoBehaviour
 
 
         }
+    }
+    private void Start()
+    {
+        AddBlocks(5);
     }
 
     private void HitSound()
@@ -148,10 +156,13 @@ public class GameController : MonoBehaviour
             _textZvanie.text = "Level: Pro";
         else if (Score > 700 && Score < 1000)
             _textZvanie.text = "Level: Legenda";
-        else if (Score >= 1000)
+        
+        if (blocks.Count == 0)
         {
             _ball.Active = false;
+            Cursor.visible = true;
             Instantiate(_winWindow);
+            
         }
     }
     private void AddSpeed()
@@ -159,15 +170,16 @@ public class GameController : MonoBehaviour
         _ball.Speed *= 2;
     }
 
-    private void AddBlocks()
+    public void AddBlocks(int Amount)
     {
-        for (int i = 0;i < 3;i++)
+        for (int i = 0;i < Amount;i++)
         {
             SpawnBlock();
         }
     }
     private void EndOfGame()
     {
+        Cursor.visible = true;
         Instantiate(_looseWindow);
     }
 

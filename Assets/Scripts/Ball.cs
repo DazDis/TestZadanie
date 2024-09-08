@@ -50,7 +50,7 @@ public class Ball : MonoBehaviour
                 }
                 if ((size.y / 2) <= Math.Abs(Point.y))
                 {
-                    Speed.x = 50 * (gameObject.transform.position.x - collision.collider.transform.position.x);
+                    Speed.x = 50 * (collision.GetContact(0).point.x - collision.collider.transform.position.x);
                     Speed.y *= -1;
                     MaxSpeed.y *= -1;
                 }
@@ -86,7 +86,7 @@ public class Ball : MonoBehaviour
                         Speed.x *= -1;
                         MaxSpeed.x *= -1;
                     }
-                    Debug.Log("Sleva/Sprava");
+  
 
                 }
                 if ((size.y / 2) <= Math.Abs(Point.y))
@@ -99,14 +99,9 @@ public class Ball : MonoBehaviour
                     }
 
 
-                    Debug.Log("Vniz/Vverh");
+                  
                 }
-                else
-                {
-                    Debug.Log(size.y / 2);
-                    Debug.Log(Math.Abs(Point.y));
-
-                }
+             
 
                 if (block != null)
                 {

@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
 
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 19.0f));
         OnMouseMove.Invoke(mousePosition);
 
 
@@ -21,6 +21,7 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetButtonDown("Exit"))
         {
+            Cursor.visible = true;
             SceneManager.LoadScene(0);
         }
 

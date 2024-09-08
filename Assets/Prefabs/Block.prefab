@@ -150,9 +150,7 @@ MonoBehaviour:
   _sprite3: {fileID: 21300000, guid: 63631290288b20c45815fec64136c899, type: 3}
   _sprite4: {fileID: 21300000, guid: a2faab60929271a44b8d9ca1f6ec1bd4, type: 3}
   _spriteRenderer: {fileID: 7968697535611179358}
-  AudioSource: {fileID: 4024892765278711185}
-  RemoveClip: {fileID: 8300000, guid: 1649628704fbf7245a4865e1279a397b, type: 3}
-  StandartClip: {fileID: 8300000, guid: 29a9e3d3d88273a40bb7a4b6d33fbcd4, type: 3}
+  _color: {r: 1, g: 1, b: 1, a: 1}
   Durability: 0
   Class: 0
   Size: {x: 0, y: 0}
@@ -165,6 +163,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   PlaySound:
+    m_PersistentCalls:
+      m_Calls: []
+  HitSound:
     m_PersistentCalls:
       m_Calls: []
 --- !u!82 &4024892765278711185

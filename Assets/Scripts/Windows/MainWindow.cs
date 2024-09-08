@@ -26,6 +26,7 @@ public class MainWindow : MonoBehaviour
 
     private void BindOnStartButtonPressed()
     {
+        Cursor.visible = false;
         SceneManager.LoadScene(1);
     }
     private void BindOnMovementButtonPressed()

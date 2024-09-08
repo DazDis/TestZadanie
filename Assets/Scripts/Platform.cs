@@ -9,8 +9,8 @@ public class Platform : MonoBehaviour
 
     private void Awake()
     {
-        _minPosition = _wallLeft.position.x + 2.5f;
-        _maxPosition = _wallRight.position.x - 2.5f;
+        _minPosition = _wallLeft.position.x + 3f;
+        _maxPosition = _wallRight.position.x - 3f;
 
     }
     public void SetPosition(float posX)
