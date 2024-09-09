@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -21,7 +20,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private AudioClip StandartClip;
     [SerializeField] private AudioClip RemoveClip;
     public AudioSource AudioSource;
-   
+
+    private int _activeBlocks;
+    private bool _inGame = true;
 
     public int Score;
     public int Health;
@@ -31,6 +32,7 @@ public class GameController : MonoBehaviour
 
     private void OnApplicationFocus(bool focus)
     {
+        if (_inGame)
             Cursor.visible = !focus;
 
     }
@@ -79,7 +81,7 @@ public class GameController : MonoBehaviour
     }
     private void Start()
     {
-        AddBlocks(5);
+        AddBlocks(3);
     }
 
     private void HitSound()
@@ -140,11 +142,14 @@ public class GameController : MonoBehaviour
             }
             num = UnityEngine.Random.Range(0, blocks.Count);
         }
+        if (!blocks[num].Active) _activeBlocks++;
+        
         blocks[num].ChangeType();
-
+       
     }
     public void AddScore(int score)
     {
+        _activeBlocks--;
         Score += score;
         _textScore.text = "Ochki: " + Score.ToString();
 
@@ -156,13 +161,14 @@ public class GameController : MonoBehaviour
             _textZvanie.text = "Level: Pro";
         else if (Score > 700 && Score < 1000)
             _textZvanie.text = "Level: Legenda";
-        
-        if (blocks.Count == 0)
+      
+        if (_activeBlocks == 0)
         {
-            _ball.Active = false;
+            _inGame = false;
+            _ball.gameObject.SetActive(false);
             Cursor.visible = true;
+            _winWindow.Text.text = "И набрал: "+Score.ToString()+" очков!";
             Instantiate(_winWindow);
-            
         }
     }
     private void AddSpeed()
@@ -172,6 +178,7 @@ public class GameController : MonoBehaviour
 
     public void AddBlocks(int Amount)
     {
+        
         for (int i = 0;i < Amount;i++)
         {
             SpawnBlock();
@@ -179,6 +186,8 @@ public class GameController : MonoBehaviour
     }
     private void EndOfGame()
     {
+        _inGame = false;
+        _ball.gameObject.SetActive(false);
         Cursor.visible = true;
         Instantiate(_looseWindow);
     }

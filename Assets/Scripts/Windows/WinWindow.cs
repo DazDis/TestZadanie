@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -6,11 +7,17 @@ public class WinWindow : MonoBehaviour
 {
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _menuButton;
+    [SerializeField] private TMP_Text _text;
+    public TMP_Text Text { get => _text; set => _text = value; }
+
+
+
 
     private void OnEnable()
     {
         _restartButton.onClick.AddListener(BindOnRestartClick);
         _menuButton.onClick.AddListener(BindOnMenuClick);
+      
     }
 
 
